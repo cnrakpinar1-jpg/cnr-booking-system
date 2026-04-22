@@ -57,8 +57,8 @@ A lightweight, modern appointment booking and management platform built for smal
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/booking-admin.git
-cd booking-admin
+git clone https://github.com/cnrakpinar1-jpg/cnr-booking-system.git
+cd cnr-booking-system
 
 # Install dependencies
 npm install
