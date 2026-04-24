@@ -1,7 +1,6 @@
 "use client";
 
 import { Booking, BookingStatus, useBookings } from "@/lib/bookings-context";
-import StatusBadge from "./StatusBadge";
 
 function formatFullDate(dateStr: string) {
   const [y, m, d] = dateStr.split("-");
@@ -110,7 +109,7 @@ export default function CalendarView({ bookings }: Props) {
                   <div className="mt-2 flex items-center justify-between gap-2">
                     {b.notes ? (
                       <p className="truncate text-xs italic text-slate-400">
-                        "{b.notes}"
+                        {`"${b.notes}"`}
                       </p>
                     ) : (
                       <span />

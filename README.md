@@ -98,3 +98,18 @@ The goal is to replace the chaos of manual booking with a simple, structured wor
 ## License
 
 MIT — free to use, modify, and distribute.
+
+---
+
+## GitHub Pages Deployment
+
+This repo is built with Next.js and is configured for static export to GitHub Pages at:
+
+`https://cnrakpinar1-jpg.github.io/cnr-booking-system/`
+
+### Deployment Steps
+
+1. Push changes to the `main` branch.
+2. In **Settings > Pages**, enable GitHub Pages for this repository.
+3. Set the source to **GitHub Actions** to use the included `.github/workflows/deploy-pages.yml` workflow.
+4. The workflow runs a static export with the correct `/cnr-booking-system/` base path and publishes the generated `out` directory.

@@ -6,6 +6,7 @@ import {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 
 export type BookingStatus = "pending" | "confirmed" | "completed";
@@ -83,24 +84,28 @@ const SEED: Booking[] = [
 const BookingsContext = createContext<BookingsContextType | null>(null);
 
 export function BookingsProvider({ children }: { children: React.ReactNode }) {
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [hydrated, setHydrated] = useState(false);
+  const [bookings, setBookings] = useState<Booking[]>(() => {
+    if (typeof window === "undefined") {
+      return SEED;
+    }
 
-  useEffect(() => {
     try {
-      const stored = localStorage.getItem("bookings");
-      setBookings(stored ? JSON.parse(stored) : SEED);
+      const stored = window.localStorage.getItem("bookings");
+      return stored ? JSON.parse(stored) : SEED;
     } catch {
-      setBookings(SEED);
+      return SEED;
     }
-    setHydrated(true);
-  }, []);
+  });
+  const hasMounted = useRef(false);
 
   useEffect(() => {
-    if (hydrated) {
-      localStorage.setItem("bookings", JSON.stringify(bookings));
+    if (!hasMounted.current) {
+      hasMounted.current = true;
+      return;
     }
-  }, [bookings, hydrated]);
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+  }, [bookings]);
 
   const addBooking = useCallback(
     (data: Omit<Booking, "id" | "status" | "createdAt">) => {

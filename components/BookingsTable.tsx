@@ -95,7 +95,7 @@ export default function BookingsTable({ bookings }: Props) {
             </div>
             <div className="mt-3 flex items-center justify-between gap-3">
               <p className="text-xs text-slate-500">
-                {formatDate(b.date)} · {b.time}
+                {formatDate(b.date)} {" · "} {b.time}
               </p>
               <StatusSelect
                 value={b.status}
@@ -103,7 +103,7 @@ export default function BookingsTable({ bookings }: Props) {
               />
             </div>
             {b.notes && (
-              <p className="mt-2 text-xs italic text-slate-400">"{b.notes}"</p>
+              <p className="mt-2 text-xs italic text-slate-400">{`"${b.notes}"`}</p>
             )}
           </div>
         ))}
